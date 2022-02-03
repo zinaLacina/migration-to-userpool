@@ -1,7 +1,7 @@
 
 resource "aws_cognito_user_pool" "pool" {
   name = var.cognito_name
-  auto_verified_attributes = ["email", "phone_number"]
+  auto_verified_attributes = ["email"]
   account_recovery_setting {
     recovery_mechanism {
       name     = "verified_email"
@@ -17,6 +17,10 @@ resource "aws_cognito_user_pool" "pool" {
     email_sending_account = "COGNITO_DEFAULT"
   }
 
+  lambda_config {
+    pre_authentication = aws_lambda_function.pre_lambda.arn
+    post_authentication = aws_lambda_function.pre_lambda.arn
+  }
 
   tags = {
     "AssetID": var.asset_id

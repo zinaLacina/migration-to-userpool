@@ -1,7 +1,7 @@
 data "aws_iam_policy_document" "authenticated" {
   statement {
     sid = "CognitoAuthenticatedUserRole"
-    effect = "allow"
+    effect = "Allow"
     principals {
       type        = "Service"
       identifiers = ["cognito-identity.amazonaws.com"]
